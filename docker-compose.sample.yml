@@ -1,4 +1,4 @@
-# ===== 共用設定(YAML anchors,減少重複)=====
+# ===== Shared settings (YAML anchors, to reduce duplication) =====
 x-defaults:
   restart: &restart-policy unless-stopped
   logging: &default-logging
@@ -37,7 +37,7 @@ services:
     logging: *default-logging
 
   mongo:
-    image: mongo:3.6                      # ⚠️ 3.6 已 EOL,建議規劃升級(見備註)
+    image: mongo:3.6
     restart: *restart-policy
     env_file:
       - ./env-files/mongo
@@ -51,7 +51,7 @@ services:
     logging: *default-logging
 
   redis:
-    image: redis:8-alpine                 # 固定版本,避免浮動 tag
+    image: redis:8-alpine
     restart: *restart-policy
     healthcheck:
       <<: *healthcheck-defaults
